@@ -38,7 +38,7 @@ systemctl restart mysql
 # Install apache
 apt-get -y install apache2
 #Install PHP
-apt-get -y install php-curl php-gd php-mysql 
+apt-get -y install php-curl php-gd php-mysql php-xml phpunit
 a2enmod rewrite 
 systemctl restart apache2
 apt-get -y install php libapache2-mod-php php-cli php-mysql php-xdebug
