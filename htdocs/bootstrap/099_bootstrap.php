@@ -3,10 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="/vendor/twbs/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"/>
-    <script src="/vendor/components/jquery/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.10.2/umd/popper.min.js"></script>
-    <script src="/vendor/twbs/bootstrap/dist/js/bootstrap.min.js"></script>
+<?php include "./bootstrap_cabecera.inc"; ?>
 <title>Pagina de prueba con Bootstrap</title>
 </head>
 <body>

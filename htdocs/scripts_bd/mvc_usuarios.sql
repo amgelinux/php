@@ -1,5 +1,5 @@
-CREATE DATABASE IF NOT EXISTS mvc;
-USE mvc;
+CREATE DATABASE IF NOT EXISTS mvc3;
+USE mvc3;
 
 -- MySQL dump 10.13  Distrib 8.0.27, for Win64 (x86_64)
 --
