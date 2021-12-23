@@ -28,7 +28,7 @@ for ($i=1; $i<200; $i++) {
     <img class=" car-img-top" src="leerzip.php?id=<?= $matrizjuegos[$i]->getId(); ?>" style="width: 100px">
     <div class="card-body">
         <h4 class="card-title"><?= $matrizjuegos[$i]->getId(); ?></h4>
-        <p class="card-text"><?= $matrizjuegos[$i]->getName(); ?></p>
+        <p class="card-text"><?= $matrizjuegos[$i]->getNombre(); ?></p>
     </div>
 </div>
 

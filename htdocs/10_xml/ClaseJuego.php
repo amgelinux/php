@@ -1,7 +1,9 @@
 <?php
 class Juego {
     private string $id;
-    private string $name;
+    private string $codigo;
+    private string $nombre;
+
 
     /**
      * @return string
@@ -14,19 +16,29 @@ class Juego {
     /**
      * @return string
      */
-    public function getName(): string
+    public function getCodigo(): string
     {
-        return $this->name;
+        return $this->codigo;
+    }
+    private string $name;
+
+    /**
+     * @return string
+     */
+    public function getNombre(): string
+    {
+        return $this->nombre;
     }
 
     /**
      * @param string $id
      * @param string $name
      */
-    public function __construct(string $id, string $name)
+    public function __construct(string $id, string $codigo, string $nombre)
     {
         $this->id = $id;
-        $this->name = $name;
+        $this->codigo = $codigo;
+        $this->nombre = $nombre;
     }
 
 }

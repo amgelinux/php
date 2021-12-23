@@ -39,6 +39,7 @@ systemctl restart mysql
 apt-get -y install apache2
 #Install PHP
 apt-get -y install php-curl php-gd php-mysql php-xml phpunit
+apt-get -y install php-zip
 a2enmod rewrite 
 systemctl restart apache2
 apt-get -y install php libapache2-mod-php php-cli php-mysql php-xdebug
@@ -75,3 +76,42 @@ sed -i "s/max_execution_time = .*/max_execution_time = 60/" /etc/php/$PHPVER/apa
 
 # Restart Apache service
 systemctl restart apache2
+
+# Instalar zsh y powerlevel10k
+echo "Instalando zsh y powerlevel10k"
+apt install -y zsh
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
+mv /root/.oh-my-zsh /home/vagrant/
+mv /root/.zshrc /home/vagrant/
+cp /var/www/html/.p10k.zsh /home/vagrant/
+sed -i "s/plugins=(git).*/plugins=(git docker)/" /home/vagrant/.zshrc
+sed -i "s/^ZSH_THEME=.*/ZSH_THEME=\"powerlevel10k\/powerlevel10k\"/" /home/vagrant/.zshrc
+sed -i "s/export ZSH=\"\/root\/.oh-my-zsh/export ZSH=\"\/home\/vagrant\/.oh-my-zsh/" /home/vagrant/.zshrc
+chown -R vagrant.vagrant /home/vagrant/.oh-my-zsh
+chown -R vagrant.vagrant /home/vagrant/.zshrc
+chown -R vagrant.vagrant /home/vagrant/.p10k.zsh
+chsh -s /bin/zsh vagrant
+
+
+
+echo "Instalando SAMBA ...."
+apt install -y samba
+mkdir /home/vagrant/laravel
+chown -R vagrant.vagrant /home/vagrant/laravel
+(echo vagrant; echo vagrant) | smbpasswd -s -a vagrant
+
+sudo tee -a /etc/samba/smb.conf << END
+
+[LARAVEL]
+   comment = Share para Laravel
+   path = /home/vagrant/laravel
+   guest ok = no
+   browseable = yes
+   create mask = 0775
+   directory mask = 0775
+   write list = vagrant
+   valid users = vagrant
+END
+
+systemctl restart nmbd smbd
