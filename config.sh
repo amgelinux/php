@@ -115,3 +115,8 @@ sudo tee -a /etc/samba/smb.conf << END
 END
 
 systemctl restart nmbd smbd
+
+# Instalación de Docker
+apt-get -y install docker.io docker-compose
+adduser vagrant docker
+
